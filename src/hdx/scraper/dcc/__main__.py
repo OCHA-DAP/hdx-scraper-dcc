@@ -9,12 +9,15 @@ import logging
 from os.path import dirname, expanduser, join
 
 from hdx.api.configuration import Configuration
+from hdx.data.hdxobject import HDXError
 from hdx.facades.infer_arguments import facade
 from hdx.utilities.downloader import Download
 from hdx.utilities.path import (
     wheretostart_tempdir_batch,
 )
 from hdx.utilities.retriever import Retrieve
+
+from src.hdx.scraper.dcc.dcc import DCC
 
 logger = logging.getLogger(__name__)
 
@@ -24,8 +27,8 @@ _UPDATED_BY_SCRIPT = "HDX Scraper: dcc"
 
 
 def main(
-    save: bool = True,
-    use_saved: bool = False,
+    save: bool = False,
+    use_saved: bool = True,
 ) -> None:
     """Generate datasets and create them in HDX
 
@@ -51,18 +54,38 @@ def main(
             #
             # Steps to generate dataset
             #
-            dataset.update_from_yaml(
-                path=join(
-                    dirname(__file__), "config", "hdx_dataset_static.yaml"
-                )
-            )
-            dataset.create_in_hdx(
-                remove_additional_resources=True,
-                match_resource_order=False,
-                hxl_update=False,
-                updated_by_script=_UPDATED_BY_SCRIPT,
-                batch=info["batch"],
-            )
+            dcc = DCC(configuration, retriever, temp_dir)
+
+            countries = dcc.get_data()
+
+            for country in countries:
+                try:
+                    dataset = dcc.generate_dataset(country)
+
+                    dataset.update_from_yaml(
+                        path=join(
+                            dirname(__file__),
+                            "config",
+                            "hdx_dataset_static.yaml",
+                        )
+                    )
+
+                    # Debug code
+                    logger.info(f"Dataset details for {country}:")
+                    logger.info(f"Name: {dataset.get('name')}")
+                    logger.info(f"Title: {dataset.get('title')}")
+                    logger.info(f"Resources: {dataset.get_resources()}")
+
+                    dataset.create_in_hdx(
+                        remove_additional_resources=False,
+                        match_resource_order=False,
+                        hxl_update=False,
+                        updated_by_script=_UPDATED_BY_SCRIPT,
+                        batch=info["batch"],
+                    )
+                except HDXError as e:
+                    logger.error(f"HDX error for {country}: {str(e)}")
+                    continue
 
 
 if __name__ == "__main__":
@@ -72,5 +95,6 @@ if __name__ == "__main__":
         user_agent_config_yaml=join(expanduser("~"), ".useragents.yaml"),
         user_agent_lookup=_USER_AGENT_LOOKUP,
         project_config_yaml=join(
-            dirname(__file__), "config", "project_configuration.yaml"),
+            dirname(__file__), "config", "project_configuration.yaml"
+        ),
     )

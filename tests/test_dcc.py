@@ -31,13 +31,7 @@ class Testdcc:
     def config_dir(self, fixtures_dir):
         return join("src", "hdx", "scraper", "dcc", "config")
 
-    def test_dcc(
-        self,
-        configuration,
-        fixtures_dir,
-        input_dir,
-        config_dir
-    ):
+    def test_dcc(self, configuration, fixtures_dir, input_dir, config_dir):
         with temp_dir(
             "Testdcc",
             delete_on_success=True,
@@ -52,7 +46,8 @@ class Testdcc:
                     save=False,
                     use_saved=True,
                 )
+                print(retriever)
 
-                dataset.update_from_yaml(
-                    path=join(config_dir, "hdx_dataset_static.yaml")
-                )
+                # dataset.update_from_yaml(
+                #     path=join(config_dir, "hdx_dataset_static.yaml")
+                # )
