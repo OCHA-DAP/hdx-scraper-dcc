@@ -60,31 +60,33 @@ def main(
 
             for country in countries:
                 try:
-                    dataset = dcc.generate_dataset(country)
+                    datasets = dcc.generate_dataset(country)
 
-                    dataset.update_from_yaml(
-                        path=join(
-                            dirname(__file__),
-                            "config",
-                            "hdx_dataset_static.yaml",
+                    for dataset in datasets:
+                        dataset.update_from_yaml(
+                            path=join(
+                                dirname(__file__),
+                                "config",
+                                "hdx_dataset_static.yaml",
+                            )
                         )
-                    )
 
-                    # Debug code
-                    logger.info(f"Dataset details for {country}:")
-                    logger.info(f"Name: {dataset.get('name')}")
-                    logger.info(f"Title: {dataset.get('title')}")
-                    logger.info(f"Resources: {dataset.get_resources()}")
+                        # Debug code
+                        logger.info(f"Dataset details for {country}:")
+                        logger.info(f"Name: {dataset.get('name')}")
+                        logger.info(f"Title: {dataset.get('title')}")
+                        logger.info(f"Resources: {dataset.get_resources()}")
 
-                    dataset.create_in_hdx(
-                        remove_additional_resources=False,
-                        match_resource_order=False,
-                        hxl_update=False,
-                        updated_by_script=_UPDATED_BY_SCRIPT,
-                        batch=info["batch"],
-                    )
+                        dataset.create_in_hdx(
+                            remove_additional_resources=False,
+                            match_resource_order=False,
+                            hxl_update=False,
+                            updated_by_script=_UPDATED_BY_SCRIPT,
+                            batch=info["batch"],
+                        )
                 except HDXError as e:
-                    logger.error(f"HDX error for {country}: {str(e)}")
+                    # logger.error(f"HDX error for {country}: {str(e)}")
+                    logger.exception(f"HDX error for {country}", exc_info=e)
                     continue
 
 

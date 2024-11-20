@@ -197,55 +197,66 @@ class DCC:
             logger.error(f"Could not get data from {self.data_url}")
             return {}
 
-    def generate_dataset(self, country_name: str) -> Dataset:
+    def generate_dataset(self, country_name: str) -> List[Dataset]:
+        datasets = []
+
+        # Get country data
         country_data = self.data[country_name]
-        dataset_type = country_data[0]["data_type"]
-        dataset_info = self._configuration[dataset_type]
-        dataset_title = f"{country_name} {dataset_info['title']}"
-        slugified_name = slugify(dataset_title)
 
-        # Dataset info
-        dataset = Dataset(
-            {
-                "name": slugified_name,
-                "notes": dataset_info["notes"],
-                "title": dataset_title,
-            }
-        )
+        # Iterate through file types for each country
+        for file in country_data:
+            dataset_type = file["data_type"]
+            dataset_info = self._configuration[dataset_type]
+            dataset_title = f"{country_name} {dataset_info['title']}"
+            slugified_name = slugify(dataset_title)
 
-        dataset.add_tags(self._configuration["tags"])
-        dataset.set_expected_update_frequency(
-            self._configuration["data_update_frequency"]
-        )
-        dataset_country_iso3 = Country.get_iso3_country_code(country_name)
-
-        dataset_time_period = datetime.strptime(
-            self._configuration["date_of_dataset"], "%B %Y"
-        )
-        dataset.set_time_period(dataset_time_period)
-        dataset.set_subnational(False)
-        try:
-            dataset.add_country_location(dataset_country_iso3)
-        except HDXError:
-            logger.error(
-                f"Couldn't find country {dataset_country_iso3}, skipping"
+            # Create dataset
+            dataset = Dataset(
+                {
+                    "name": slugified_name,
+                    "notes": dataset_info["notes"],
+                    "title": dataset_title,
+                }
             )
-            return
 
-        resource_name = country_data[0]["dataset_name"]
-        resource_description = dataset_info["description"].replace(
-            "[country]", country_name
-        )
-        resource = Resource(
-            {
-                "name": resource_name,
-                "id": slugify(resource_name),
-                "format": "GeoTIFF",
-                "description": resource_description,
-            }
-        )
+            # Add dataset info
+            dataset.add_tags(self._configuration["tags"])
+            dataset.set_expected_update_frequency(
+                self._configuration["data_update_frequency"]
+            )
+            dataset_country_iso3 = Country.get_iso3_country_code(country_name)
+            dataset_time_period = datetime.strptime(
+                self._configuration["date_of_dataset"], "%B %Y"
+            )
+            dataset.set_time_period(dataset_time_period)
+            dataset.set_subnational(False)
+            try:
+                dataset.add_country_location(dataset_country_iso3)
+            except HDXError:
+                logger.error(
+                    f"Couldn't find country {dataset_country_iso3}, skipping"
+                )
+                return
 
-        resource.set_file_to_upload(self.data[country_name][0]["filepath"])
-        dataset.add_update_resources([resource])
+            # Create resource
+            resource_name = file["dataset_name"]
+            resource_description = dataset_info["description"].replace(
+                "[country]", country_name
+            )
+            resource = Resource(
+                {
+                    "name": resource_name,
+                    "id": slugify(resource_name),
+                    "format": "GeoTIFF",
+                    "description": resource_description,
+                }
+            )
 
-        return dataset
+            # Attach file to resource
+            resource.set_file_to_upload(file["filepath"])
+            dataset.add_update_resources([resource])
+
+            # Add dataset to list
+            datasets.append(dataset)
+
+        return datasets
