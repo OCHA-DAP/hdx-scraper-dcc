@@ -2,13 +2,12 @@
 data_url: https://raw.githubusercontent.com/Data-Science-Unit/ChildPovetyAccesstoServicesV2/refs/heads/main/README.md
 walking:
   title: Walking Travel Time to nearest Level IV health centre Map
-  notes: This file is a zip archive containing travel time map in Geotiff format and a thumbnail image in PNG format.
+  description: This file is a zip archive containing travel time map in Geotiff format and a thumbnail image in PNG format.
   date_of_dataset: August 2024
-  description: |
+  notes: |
     A 100 m spatial resolution geotiff of walking travel time in seconds to nearest health facility in [country]. The data was generated using the Child Poverty and Access to Services (CPAS) software (10.5281/zenodo.4638563) and was created as part of the CPAS project within the Data for Children Collaborative. The travel time is calculated assuming walking speeds on all roads, tracks, paths and land cover types. A full description is available [here](https://doi.org/10.1038/s41597-022-01274-w) a video description of the data is also available [here](https://www.dataforchildrencollaborative.com/outputs/presentation-a-100m-resolution-travel-time-map)
 
     Projection system is: GCS_WGS_1984 EPSG 4326 for all
-  methodology: Other
   methodology_other: |
     The least cost path method was used here which is broken down into two steps: (1) the creation of a ‘cost’ allocation surface which can also be referred to as an effort or friction surface and represents the effort to travel across a particular pixel (2) uses the cost allocation (or effort surface) in a least cost path analysis to estimate travel time from every pixel to the nearest destination location (in this case health centres). This was done using Dijkstra’s algorithm to create Dijkstra trees which find the shortest path from one point to another. Full details of the method can be found in Watmough et al. (2022) and the code available in Zenodo (Hagdorn 2021)
 
@@ -21,13 +20,12 @@ walking:
 
 motorised:
   title: Motorised Travel Time (in seconds) to nearest health centre
-  notes: This file is a zip archive containing travel time map in Geotiff format and a thumbnail image in PNG format.
+  description: This file is a zip archive containing travel time map in Geotiff format and a thumbnail image in PNG format.
   date_of_dataset: August 2024
-  description: |
+  notes: |
     A 100 m spatial resolution geotiff of motorised travel time in seconds to nearest health facility in [country]. The data was generated using the Child Poverty and Access to Services (CPAS) software (10.5281/zenodo.4638563) and was created as part of the CPAS project within the Data for Children Collaborative. The travel time is calculated assuming driving speeds of local public transport options on all-weather roads/asphalt roads and walking speeds on all other roads, tracks, paths and land cover types. A full description is available [here](https://doi.org/10.1038/s41597-022-01274-w) a video description of the data is also available [here](https://www.dataforchildrencollaborative.com/outputs/presentation-a-100m-resolution-travel-time-map)
 
     Projection system is: GCS_WGS_1984 EPSG 4326 for all
-  methodology: Other
   methodology_other: |
     The least cost path method was used here which is broken down into two steps: (1) the creation of a ‘cost’ allocation surface which can also be referred to as an effort or friction surface and represents the effort to travel across a particular pixel (2) uses the cost allocation (or effort surface) in a least cost path analysis to estimate travel time from every pixel to the nearest destination location (in this case health centres). This was done using Dijkstra’s algorithm to create Dijkstra trees which find the shortest path from one point to another. Full details of the method can be found in Watmough et al. (2022) and the code available in Zenodo (Hagdorn 2021)
 

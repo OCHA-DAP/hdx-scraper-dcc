@@ -58,7 +58,7 @@ def main(
 
             countries = dcc.get_data()
 
-            for country in countries:
+            for country in countries[:1]:  # for testing
                 try:
                     datasets = dcc.generate_dataset(country)
 
@@ -85,7 +85,6 @@ def main(
                             batch=info["batch"],
                         )
                 except HDXError as e:
-                    # logger.error(f"HDX error for {country}: {str(e)}")
                     logger.exception(f"HDX error for {country}", exc_info=e)
                     continue
 

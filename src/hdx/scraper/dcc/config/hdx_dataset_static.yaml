@@ -1,5 +1,4 @@
 license_id: cc-by
-methodology: Other
 caveats: |
   The United Nations Office for the Coordination of Humanitarian Affairs (OCHA) Common Operational Datasets (COD) Administration Level 0 boundary polygons were used in instances where geoBoundaries simplified polygons were not available.
 
@@ -13,7 +12,7 @@ caveats: |
 dataset_source: Data for Children Collaborative
 package_creator: HDX Data Systems Team
 private: False
-maintainer: 71421920-fdc8-40fb-ac97-99b85e90b8a7
-owner_org:  hdx # fix this
+maintainer: fdbb8e79-f020-4039-ab3a-9adb482273b8 #71421920-fdc8-40fb-ac97-99b85e90b8a7 gwatmough
+owner_org:  hdx # should be The University of Edinburgh
 data_update_frequency: -1 # Never
 subnational: False
