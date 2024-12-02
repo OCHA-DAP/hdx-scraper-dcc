@@ -145,7 +145,7 @@ class Testdcc:
 
     @pytest.fixture(scope="class")
     def config_dir(self, fixtures_dir):
-        return join("..", "src", "hdx", "scraper", "dcc", "config")
+        return join("src", "hdx", "scraper", "dcc", "config")
 
     def test_dcc(
         self,
