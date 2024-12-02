@@ -28,7 +28,7 @@ _UPDATED_BY_SCRIPT = "HDX Scraper: dcc"
 
 def main(
     save: bool = False,
-    use_saved: bool = True,
+    use_saved: bool = False,
 ) -> None:
     """Generate datasets and create them in HDX
 
@@ -58,7 +58,7 @@ def main(
 
             countries = dcc.get_data()
 
-            for country in countries[:1]:  # for testing
+            for country in countries:
                 try:
                     datasets = dcc.generate_dataset(country)
 
@@ -92,10 +92,8 @@ def main(
 if __name__ == "__main__":
     facade(
         main,
-        hdx_site="stage",
+        hdx_site="demo",
         user_agent_config_yaml=join(expanduser("~"), ".useragents.yaml"),
         user_agent_lookup=_USER_AGENT_LOOKUP,
-        project_config_yaml=join(
-            dirname(__file__), "config", "project_configuration.yaml"
-        ),
+        project_config_yaml=join(dirname(__file__), "config", "project_configuration.yaml"),
     )

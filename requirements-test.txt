@@ -194,7 +194,7 @@ pyphonetics==0.5.3
     # via
     #   -c requirements.txt
     #   hdx-python-country
-pytest==8.3.3
+pytest==8.3.4
     # via
     #   hdx-scraper-dcc (pyproject.toml)
     #   pytest-cov
@@ -253,7 +253,7 @@ rich==13.9.4
     # via
     #   -c requirements.txt
     #   typer
-rpds-py==0.21.0
+rpds-py==0.22.0
     # via
     #   -c requirements.txt
     #   jsonschema
@@ -321,7 +321,7 @@ typeguard==4.4.1
     # via
     #   -c requirements.txt
     #   inflect
-typer==0.13.1
+typer==0.14.0
     # via
     #   -c requirements.txt
     #   frictionless

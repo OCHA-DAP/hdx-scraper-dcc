@@ -2,7 +2,7 @@ license_id: cc-by
 caveats: |
   The United Nations Office for the Coordination of Humanitarian Affairs (OCHA) Common Operational Datasets (COD) Administration Level 0 boundary polygons were used in instances where geoBoundaries simplified polygons were not available.
 
-  Where countries were not included in the health facility data published by Maina et al. (2019) we used data from the Global Healthsites Mapping Project published on Humanitarian Data Exchange (this included: Egypt, Libya, Tunisia, Algeria, Morocco).
+  Where countries were not included in the health facility data published by Maina et al. (2019) we used data from the Global Health sites Mapping Project published on Humanitarian Data Exchange (this included: Egypt, Libya, Tunisia, Algeria, Morocco).
 
   For each country we removed health sites that were unlikely to offer child focused services and vaccinations. Facilities that were removed included: pharmacy, dentist, veterinary, café/pharmacy, social facility.
 
@@ -12,7 +12,7 @@ caveats: |
 dataset_source: Data for Children Collaborative
 package_creator: HDX Data Systems Team
 private: False
-maintainer: fdbb8e79-f020-4039-ab3a-9adb482273b8 #71421920-fdc8-40fb-ac97-99b85e90b8a7 gwatmough
-owner_org:  hdx # should be The University of Edinburgh
+maintainer: "71421920-fdc8-40fb-ac97-99b85e90b8a7" # "fdbb8e79-f020-4039-ab3a-9adb482273b8" gwatmough
+owner_org: "bb1ac1eb-c322-40f0-b0ea-1696792e61df" # "hdx" data-for-children-collaborative
 data_update_frequency: -1 # Never
 subnational: False

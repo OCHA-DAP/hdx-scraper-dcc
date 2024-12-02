@@ -3,7 +3,6 @@ data_url: https://raw.githubusercontent.com/Data-Science-Unit/ChildPovetyAccesst
 walking:
   title: Walking Travel Time to nearest Level IV health centre Map
   description: This file is a zip archive containing travel time map in Geotiff format and a thumbnail image in PNG format.
-  date_of_dataset: August 2024
   notes: |
     A 100 m spatial resolution geotiff of walking travel time in seconds to nearest health facility in [country]. The data was generated using the Child Poverty and Access to Services (CPAS) software (10.5281/zenodo.4638563) and was created as part of the CPAS project within the Data for Children Collaborative. The travel time is calculated assuming walking speeds on all roads, tracks, paths and land cover types. A full description is available [here](https://doi.org/10.1038/s41597-022-01274-w) a video description of the data is also available [here](https://www.dataforchildrencollaborative.com/outputs/presentation-a-100m-resolution-travel-time-map)
 
@@ -21,7 +20,6 @@ walking:
 motorised:
   title: Motorised Travel Time (in seconds) to nearest health centre
   description: This file is a zip archive containing travel time map in Geotiff format and a thumbnail image in PNG format.
-  date_of_dataset: August 2024
   notes: |
     A 100 m spatial resolution geotiff of motorised travel time in seconds to nearest health facility in [country]. The data was generated using the Child Poverty and Access to Services (CPAS) software (10.5281/zenodo.4638563) and was created as part of the CPAS project within the Data for Children Collaborative. The travel time is calculated assuming driving speeds of local public transport options on all-weather roads/asphalt roads and walking speeds on all other roads, tracks, paths and land cover types. A full description is available [here](https://doi.org/10.1038/s41597-022-01274-w) a video description of the data is also available [here](https://www.dataforchildrencollaborative.com/outputs/presentation-a-100m-resolution-travel-time-map)
 
@@ -42,5 +40,4 @@ tags:
   - transportation
   - africa
 
-data_update_frequency: -1
 date_of_dataset: August 2024

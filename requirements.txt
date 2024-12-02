@@ -141,7 +141,7 @@ rfc3986==2.0.0
     # via frictionless
 rich==13.9.4
     # via typer
-rpds-py==0.21.0
+rpds-py==0.22.0
     # via
     #   jsonschema
     #   referencing
@@ -179,7 +179,7 @@ text-unidecode==1.3
     # via python-slugify
 typeguard==4.4.1
     # via inflect
-typer==0.13.1
+typer==0.14.0
     # via frictionless
 typing-extensions==4.12.2
     # via
