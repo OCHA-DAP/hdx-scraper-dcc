@@ -137,7 +137,7 @@ class Testdcc:
 
     @pytest.fixture(scope="class")
     def fixtures_dir(self):
-        return join("fixtures")
+        return join("tests", "fixtures")
 
     @pytest.fixture(scope="class")
     def input_dir(self, fixtures_dir):
