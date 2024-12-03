@@ -7,7 +7,7 @@ from hdx.utilities.path import temp_dir
 from hdx.utilities.retriever import Retrieve
 from hdx.utilities.useragent import UserAgent
 
-from src.hdx.scraper.dcc.dcc import DCC
+from hdx.scraper.dcc.dcc import DCC
 
 
 @pytest.fixture(scope="module")
