@@ -205,10 +205,10 @@ class DCC:
                 return []
 
             # Create resource
-            resource_name = f"service_area_{country_name}_{data_type}.tif"
+            resource_name = f"service_area_{country_name}_{data_type}"
             resource_description = dataset_info["description"]
             resource = {
-                "name": slugify(resource_name),
+                "name": f"{slugify(resource_name)}.tif",
                 "description": resource_description,
                 "url": url,
                 "format": "GeoTIFF",

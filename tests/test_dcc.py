@@ -72,9 +72,9 @@ def expected_dataset():
         "(2023)](https://www.nature.com/articles/s41597-022-01274-w)\n"
         "[Hagdorn "
         "(2021)](https://zenodo.org/records/4638563#.YOycpRNKg6g)\n",
-        "name": "algeria-walking-travel-time-to-nearest-level-iv-health-centre-map",
+        "name": "algeria-walking-travel-time-to-nearest-level-iv-health-centre",
         "notes": "A 100 m spatial resolution geotiff of walking travel time in seconds "
-        "to nearest health facility in [country]. The data was generated using the Child "
+        "to nearest health facility in Algeria. The data was generated using the Child "
         "Poverty and Access to Services (CPAS) software (10.5281/zenodo.4638563) and was "
         "created as part of the CPAS project within the Data for Children Collaborative. "
         "The travel time is calculated assuming walking speeds on all roads, tracks, paths "
@@ -113,7 +113,7 @@ def expected_dataset():
 def expected_resources():
     return [
         {
-            "name": "service_area_algeria_walking.tif",
+            "name": "service-area-algeria-walking.tif",
             "description": "This file is a zip archive containing travel time map in Geotiff "
             "format and a thumbnail image in PNG format.",
             "format": "geotiff",
