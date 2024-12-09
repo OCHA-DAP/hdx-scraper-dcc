@@ -6,6 +6,7 @@ import re
 from datetime import datetime
 from typing import Dict, List
 
+import requests
 from hdx.api.configuration import Configuration
 from hdx.data.dataset import Dataset
 from hdx.data.hdxobject import HDXError
@@ -25,9 +26,9 @@ class DCC:
         self.data = {}
         self.data_url = self._configuration["data_url"]
 
-    def get_location_name(self, country_name: str) -> str:
-        """Convert country name from data to HDX location name using
-           HDX Python Country
+    def _get_location_name(self, country_name: str) -> str:
+        """Helper function to Convert country name from data to HDX location
+            name using HDX Python Country
 
         Args:
             country_name (str): Country name from data
@@ -44,13 +45,14 @@ class DCC:
             return "None"
 
     def _parse_table_content(self, table_content: str) -> Dict:
-        """Parse table content into a dictionary
+        """Helper function to parse table content from a markdown file into a dictionary,
+        extracting country names and URLs associated with walking and motorised travel
 
         Args:
             table_content (str): Content of the table
 
         Returns:
-            Dict: Parsed country data
+            Dict: Parsed country data, with country names as keys and travel type URLs as values
         """
         data = {}
         rows = [row.strip() for row in table_content.split("\n") if row.strip()]
@@ -61,11 +63,21 @@ class DCC:
                 continue
 
             country, walking, motorised = parts[:3]
+
+            # Skip Tanzania_w_zanzibar row
             if country == "Tanzania_w_zanzibar":
                 continue
 
+            # Process the "File:" field if present (Ghana row)
+            if "File:" in walking and "<br>" in walking:
+                walking = re.search(r"File:\s*(https?://[^\s<]+)", walking)
+                walking = walking.group(1) if walking else None
+            if "File:" in motorised and "<br>" in motorised:
+                motorised = re.search(r"File:\s*(https?://[^\s<]+)", motorised)
+                motorised = motorised.group(1) if motorised else None
+
             try:
-                location_name = self.get_location_name(country)
+                location_name = self._get_location_name(country)
                 data[location_name] = {
                     "walking": walking,
                     "motorised": motorised,
@@ -73,6 +85,25 @@ class DCC:
             except HDXError:
                 logger.warning(f"Skipping country '{country}' due to location resolution error.")
         return data
+
+    def _check_link(self, url: str) -> bool:
+        """Helper function to check if URL is valid without downloading content
+
+        Args:
+            url (str): The URL to check
+
+        Returns:
+            bool: True if the link is good (status code 200-399), False if not.
+        """
+        try:
+            response = requests.head(url, allow_redirects=True, timeout=10)
+            if response.status_code >= 200 and response.status_code < 400:
+                return True
+            else:
+                return False
+        except requests.RequestException as e:
+            print(f"Error checking {url}: {e}")
+            return False
 
     def get_country_data(self, text: str) -> Dict:
         """Extract TIF file urls for each country from markdown file
@@ -121,6 +152,16 @@ class DCC:
         return sorted(self.data)
 
     def generate_dataset(self, country_name: str) -> List[Dataset]:
+        """Generate a list of datasets for a given country by iterating
+            through data types, validating URLs, and creating dataset
+            objects with associated metadata and resources
+
+        Args:
+            country_name (str): Name of the country
+
+        Returns:
+            List[Dataset]: A list of dataset objects for the given country
+        """
         datasets = []
 
         # Get country data
@@ -128,7 +169,13 @@ class DCC:
 
         # Iterate through file types for each country
         for data_type, url in country_data.items():
+            # Skip if link isn't good
+            if not self._check_link(url):
+                print(f"The link for {country_name}: {data_type} is invalid.")
+                continue
+
             dataset_info = self._configuration[data_type]
+            dataset_notes = dataset_info["notes"].replace("[country]", country_name)
             dataset_title = f"{country_name} {dataset_info['title']}"
             slugified_name = slugify(dataset_title)
 
@@ -136,7 +183,7 @@ class DCC:
             dataset = Dataset(
                 {
                     "name": slugified_name,
-                    "notes": dataset_info["notes"],
+                    "notes": dataset_notes,
                     "title": dataset_title,
                 }
             )
@@ -159,9 +206,9 @@ class DCC:
 
             # Create resource
             resource_name = f"service_area_{country_name}_{data_type}.tif"
-            resource_description = dataset_info["description"].replace("[country]", country_name)
+            resource_description = dataset_info["description"]
             resource = {
-                "name": resource_name,
+                "name": slugify(resource_name),
                 "description": resource_description,
                 "url": url,
                 "format": "GeoTIFF",

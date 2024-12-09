@@ -28,7 +28,7 @@ def expected_dataset():
         "The accuracy of the road data sets has not been validated,\n"
         "\n"
         "[Maina et al. (2019)](https://www.nature.com/articles/s41597-019-0142-2)\n",
-        "data_update_frequency": -1,
+        "data_update_frequency": 365,
         "dataset_date": "[2024-08-01T00:00:00 TO 2024-08-01T00:00:00]",
         "dataset_source": "Data for Children Collaborative",
         "groups": [{"name": "dza"}],
@@ -105,7 +105,7 @@ def expected_dataset():
                 "vocabulary_id": "b891512e-9516-4bf5-962a-7a289772a2a1",
             },
         ],
-        "title": "Algeria Walking Travel Time to nearest Level IV health centre Map",
+        "title": "Algeria Walking Travel Time to nearest Level IV health centre",
     }
 
 
@@ -113,7 +113,7 @@ def expected_dataset():
 def expected_resources():
     return [
         {
-            "name": "service_area_Algeria_walking.tif",
+            "name": "service_area_algeria_walking.tif",
             "description": "This file is a zip archive containing travel time map in Geotiff "
             "format and a thumbnail image in PNG format.",
             "format": "geotiff",

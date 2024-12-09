@@ -72,13 +72,13 @@ def main(
                         )
 
                         # Debug code
-                        logger.info(f"Dataset details for {country}:")
-                        logger.info(f"Name: {dataset.get('name')}")
-                        logger.info(f"Title: {dataset.get('title')}")
-                        logger.info(f"Resources: {dataset.get_resources()}")
+                        # logger.info(f"Dataset details for {country}:")
+                        # logger.info(f"Name: {dataset.get('name')}")
+                        # logger.info(f"Title: {dataset.get('title')}")
+                        # logger.info(f"Resources: {dataset.get_resources()}")
 
                         dataset.create_in_hdx(
-                            remove_additional_resources=False,
+                            remove_additional_resources=True,
                             match_resource_order=False,
                             hxl_update=False,
                             updated_by_script=_UPDATED_BY_SCRIPT,
