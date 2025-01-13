@@ -14,7 +14,8 @@ walking:
 
     Travel was assumed to be walking on all road types and land cover. For motorised transport see the other download for each country.
 
-    [Watmough et al (2023)](https://www.nature.com/articles/s41597-022-01274-w)
+    [Watmough, et al. (2022) Using open-source data to construct 20 metre resolution maps of children’s travel time to the nearest health facility, Scientific Data, 9(217)](https://www.nature.com/articles/s41597-022-01274-w)
+
     [Hagdorn (2021)](https://zenodo.org/records/4638563#.YOycpRNKg6g)
 
 motorised:
@@ -31,7 +32,8 @@ motorised:
 
     Travel was assumed to be by motorised vehicle on: motorways, expressways, trunk roads, primary, secondary and tertiary roads. All other road types were assumed to have walking speeds.
 
-    [Watmough et al (2023)](https://www.nature.com/articles/s41597-022-01274-w)
+    [Watmough, et al. (2022) Using open-source data to construct 20 metre resolution maps of children’s travel time to the nearest health facility, Scientific Data, 9(217)](https://www.nature.com/articles/s41597-022-01274-w)
+
     [Hagdorn (2021)](https://zenodo.org/records/4638563#.YOycpRNKg6g)
 
 tags:
