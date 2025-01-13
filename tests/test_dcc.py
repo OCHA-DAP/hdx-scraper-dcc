@@ -68,8 +68,10 @@ def expected_dataset():
         "land cover. For motorised transport see the other "
         "download for each country.\n"
         "\n"
-        "[Watmough et al "
-        "(2023)](https://www.nature.com/articles/s41597-022-01274-w)\n"
+        "[Watmough, et al. "
+        "(2022) Using open-source data to construct 20 metre resolution maps of children’s "
+        "travel time to the nearest health facility, Scientific Data, 9(217)](https://www.nature.com/articles/s41597-022-01274-w)\n"
+        "\n"
         "[Hagdorn "
         "(2021)](https://zenodo.org/records/4638563#.YOycpRNKg6g)\n",
         "name": "algeria-walking-travel-time-to-nearest-level-iv-health-centre",
