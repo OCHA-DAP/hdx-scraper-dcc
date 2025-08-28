@@ -18,8 +18,10 @@ from slugify import slugify
 logger = logging.getLogger(__name__)
 
 
-class DCC:
-    def __init__(self, configuration: Configuration, retriever: Retrieve, temp_dir: str):
+class Pipeline:
+    def __init__(
+        self, configuration: Configuration, retriever: Retrieve, temp_dir: str
+    ):
         self._configuration = configuration
         self._retriever = retriever
         self._temp_dir = temp_dir
@@ -83,7 +85,9 @@ class DCC:
                     "motorised": motorised,
                 }
             except HDXError:
-                logger.warning(f"Skipping country '{country}' due to location resolution error.")
+                logger.warning(
+                    f"Skipping country '{country}' due to location resolution error."
+                )
         return data
 
     def _check_link(self, url: str) -> bool:
@@ -124,7 +128,9 @@ class DCC:
         table_start = separator_match.end()
         table_end = text.find("\n\n", table_start)
         table_content = (
-            text[table_start:table_end].strip() if table_end != -1 else text[table_start:].strip()
+            text[table_start:table_end].strip()
+            if table_end != -1
+            else text[table_start:].strip()
         )
 
         return self._parse_table_content(table_content)
