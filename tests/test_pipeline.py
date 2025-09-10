@@ -139,9 +139,7 @@ class TestPipeline:
                                 "description": "This file is a zip archive containing travel time map in Geotiff "
                                 "format and a thumbnail image in PNG format.",
                                 "format": "geotiff",
-                                "resource_type": "api",
                                 "url": "https://s3.eidf.ac.uk/eidf158-walkingtraveltimemaps/service_area_Algeria_walking.tif",
-                                "url_type": "api",
                             }
                         ]
                         for resource in resources:
