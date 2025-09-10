@@ -3,7 +3,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/OCHA-DAP/hdx-scraper-dcc/badge.svg?branch=main&ts=1)](https://coveralls.io/github/OCHA-DAP/hdx-scraper-dcc?branch=main)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
-This script ...
+This script reads data from a [markdown file](https://raw.githubusercontent.com/Data-Science-Unit/ChildPovetyAccesstoServicesV2/refs/heads/main/README.md) and extracts links to geotiff files for each country and uploads the links to HDX. The script runs once a year.
 
 ## Development
 
